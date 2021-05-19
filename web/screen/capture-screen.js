@@ -3,7 +3,7 @@
  * @Company: kaochong
  * @Date: 2021-05-18 19:24:44
  * @LastEditors: xiuquanxu
- * @LastEditTime: 2021-05-19 18:39:31
+ * @LastEditTime: 2021-05-19 19:13:41
 */
 // https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLCanvasElement/captureStream
 // captureStream() 从canvas api上获取到一个MediaStream
@@ -13,7 +13,6 @@
 // var enumeratorPromise = navigator.mediaDevices.enumerateDevices();
 // https://developer.mozilla.org/zh-CN/docs/Web/API/Screen_Capture_API/Using_Screen_Capture
 // as a live MediaStream
-const video = document.getElementById('screen');
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 let imageData = null;
@@ -32,15 +31,10 @@ document.getElementById('take').onclick = () => {
 }
 document.getElementById('start').onclick = async () => {
     const mediaStream = await startCapture(DisplayMediaStreamConstraints);
-    // video.srcObject = mediaStream;
-    console.log(' mediaStream:', mediaStream.getVideoTracks());
     const track = mediaStream.getVideoTracks()[0];
     const processor = new MediaStreamTrackProcessor( track );
     reader = processor.readable.getReader();
     readChunk();
-    // console.log(mediaStream.getVideoTracks());
-    // https://developer.mozilla.org/en-US/docs/Web/API/ImageCapture
-    // imageCapture = new ImageCapture(track);
 }
 
 function readChunk() {
