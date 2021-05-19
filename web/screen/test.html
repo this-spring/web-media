@@ -1,0 +1,62 @@
+<!--
+ * @Author: xiuquanxu
+ * @Company: kaochong
+ * @Date: 2021-05-19 17:57:05
+ * @LastEditors: xiuquanxu
+ * @LastEditTime: 2021-05-19 18:03:53
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas" width="400" height="400"></canvas>
+</body>
+</html>
+<script>
+    // The app provides error handling.
+function onDecoderError(error) {  }
+
+// App provides stream of encoded chunks to decoder.
+function streamEncodedChunks(decodeCallback) {  }
+
+// The document contains a canvas for displaying VideoFrames.
+const canvasElement = document.getElementById("canvas");
+const canvasContext = canvas.getContext('2d')
+
+// Paint every video frame ASAP for lowest latency.
+function paintFrameToCanvas(videoFrame) {
+  // VideoFrame is a CanvasImageSource.
+  // See https://github.com/web-platform-tests/wpt/blob/master/webcodecs/videoFrame-drawImage.any.js for more examples.
+  //
+  // Alternaviely, paint using tex(Sub)Image(2D|3D).
+  // See https://github.com/web-platform-tests/wpt/blob/master/webcodecs/videoFrame-texImage.any.js for more examples.
+  canvasContext.drawImage(frame, 0, 0);
+  
+  // IMPORTANT: Release the frame to avoid stalling the decoder.
+  frame.close();
+}
+
+const videoDecoder = new VideoDecoder({
+  output: paintFrameToCanvas,
+  error: onDecoderError
+});
+
+videoDecoder.configure(
+    {
+        codec: 'vp8',
+        tuning: {
+            bitrate: 1_000_000,
+            framerate: 24,
+            width: 600,
+            height: 600
+        }
+    }
+).then((res) => {
+    console.log(res);
+})
+</script>
