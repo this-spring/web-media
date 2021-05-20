@@ -3,7 +3,7 @@
  * @Company: kaochong
  * @Date: 2021-05-19 18:41:35
  * @LastEditors: xiuquanxu
- * @LastEditTime: 2021-05-19 19:21:00
+ * @LastEditTime: 2021-05-19 19:24:14
 -->
 ## 前言  
 做web多媒体有一段时间了，打算总结一下web端音视频知识，包括：音频捕获输出pcm、摄像头捕获输出rgba、屏幕捕获输出rgba、音频播放pcm、视频播放yuv、音频pcm利用wasm封装aac、视频rgba利用wasm编码h264。  
@@ -210,3 +210,4 @@ async function startCapture(displayMediaOptions) {
 ## 总结  
 - 本章介绍了两种方式实现屏幕采集rgba功能  
 - web端已经有webrtc可以实现非常复杂功能，本系列文章希望从元数据角度来学习一下web端音视频，采集元数据通过wasm对原数据进行编解码，这给不使用webrtc的团队来做直播(录屏、出镜、录音)提供了可能。
+- 再查VideoDecorder这个Api时候发现MDN没有，最后在w3c找到了解释，所以说要充分认识到官方的重要性，新特性和规范是在博客中有可能找不到的，但官方文档一定会有。
