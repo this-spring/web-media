@@ -3,15 +3,19 @@
  * @Company: kaochong
  * @Date: 2021-05-18 19:24:44
  * @LastEditors: xiuquanxu
- * @LastEditTime: 2021-05-20 14:43:39
+ * @LastEditTime: 2021-06-01 12:25:22
 */
+import { DownloadBytes } from '../../help/download.js';
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
-let imageData = null;
+let imageData = null; // rgba
 let time = 0;
 let reader = null;
 document.getElementById('take').onclick = () => {
-    console.log(' time:', time, ' raw data len:', imageData.length, ' width:', canvas.width, ' height:', canvas.height);
+    console.log(' time:', time, ' raw data len:', imageData.length, ' width:', canvas.width, ' height:', canvas.height, imageData);
+    const download = new DownloadBytes();
+    download.saveUint8Array(imageData);
+    download.downloadUint8Array('1280-720-rgba.raw');
 }
 document.getElementById('start').onclick = () => {
     start();

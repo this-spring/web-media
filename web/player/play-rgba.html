@@ -1,0 +1,27 @@
+<!--
+ * @Author: xiuquanxu
+ * @Company: kaochong
+ * @Date: 2021-06-01 12:20:52
+ * @LastEditors: xiuquanxu
+ * @LastEditTime: 2021-06-01 12:29:16
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="rgba" height="720" width="1280"></canvas>
+</body>
+</html>
+<script type="module">
+    import { DrawRgba } from '../../help/draw-rgba.js';
+    const canvas = document.getElementById('rgba');
+    const d = new DrawRgba(canvas);
+    fetch('../../data/1280-720-rgba.raw').then(res => res.arrayBuffer()).then(buffer => {
+        d.play(new Uint8Array(buffer), 1280, 720);
+    });
+</script>
