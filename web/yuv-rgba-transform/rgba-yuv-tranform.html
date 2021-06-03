@@ -1,9 +1,9 @@
 <!--
  * @Author: xiuquanxu
  * @Company: kaochong
- * @Date: 2021-06-02 18:41:36
+ * @Date: 2021-06-03 17:43:46
  * @LastEditors: xiuquanxu
- * @LastEditTime: 2021-06-03 17:42:35
+ * @LastEditTime: 2021-06-03 17:51:29
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -24,14 +24,15 @@
     </style>
 </head>
 <body>
-    <p>libyuv</p>
+    <h1>yuv和rgba转换</h1>
+    <p>始于lib/libyuv/test-wasm.html</p>
     <button id="yuv2Rgba">yuv to rgba</button><br/>
     <button id="argb2Yuv">argb to yuv</button><br/>
     <canvas id="rgba" width="1280" height="720"></canvas>
     <canvas id="yuv" width="1280" height="720"></canvas>
 </body>
 </html>
-<script src="./wasm/LibYUV.js"></script>
+<script src="../../wasm/libyuv/LibYUV.js"></script>
 
 <script type="module">
     import { DrawRgba } from '../../help/draw-rgba.js';
@@ -63,7 +64,7 @@
     }, 1 * 1000);
     // wasmDsp = LibYUV();
 
-    fetch('./wasm/LibYUV.wasm').then(res => res.arrayBuffer()).then((buffer) => {
+    fetch('../../wasm/libyuv/LibYUV.wasm').then(res => res.arrayBuffer()).then((buffer) => {
         LibYUV['wasmBinary'] = buffer;
         wasmDsp = LibYUV({ wasmBinary: LibYUV.wasmBinary });
     });
