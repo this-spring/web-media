@@ -1,9 +1,9 @@
 <!--
  * @Author: xiuquanxu
  * @Company: kaochong
- * @Date: 2021-06-01 12:20:52
+ * @Date: 2021-06-03 19:18:04
  * @LastEditors: xiuquanxu
- * @LastEditTime: 2021-06-02 10:43:29
+ * @LastEditTime: 2021-06-03 19:35:32
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -14,15 +14,24 @@
     <title>Document</title>
 </head>
 <body>
-    <canvas id="rgba" height="720" width="1280"></canvas>
+    <canvas width="1280" height="720" id="rgba"></canvas>
 </body>
 </html>
 <script type="module">
-    import { DrawRgba } from '../../help/draw-rgba.js';
+    const worker = new Worker('../../help/offscreen-draw-rgba.js');
     const canvas = document.getElementById('rgba');
-    const d = new DrawRgba(canvas);
+    const offscreen = canvas.transferControlToOffscreen();
+    worker.postMessage({
+        type: '1',
+        canvas: offscreen
+    }, [offscreen]);
+    
     fetch('../../lib/libyuv/1280-720-argb-1.raw').then(res => res.arrayBuffer()).then(buffer => {
-        console.log(buffer);
-        d.play(new Uint8Array(buffer), 1280, 720);
+        worker.postMessage({
+            type: '2',
+            data: buffer,
+            width: 1280,
+            height: 720,
+        });
     });
 </script>

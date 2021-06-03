@@ -1,0 +1,39 @@
+<!--
+ * @Author: xiuquanxu
+ * @Company: kaochong
+ * @Date: 2021-06-01 12:20:58
+ * @LastEditors: xiuquanxu
+ * @LastEditTime: 2021-06-03 19:44:38
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="yuv" width="1280" height="720"></canvas>
+</body>
+</html>
+<script type="module">
+    const canvas = document.getElementById('yuv');
+    const offscreen = canvas.transferControlToOffscreen();
+    const worker = new Worker('../../help/offscreen-draw-yuv.js');
+
+    worker.postMessage({
+        type: '1',
+        canvas: offscreen
+    }, [offscreen]);
+
+    fetch('../../data/1280-720-yuv.raw').then(res => res.arrayBuffer()).then(buffer => {
+        const width = 1280, height = 720;
+        worker.postMessage({
+            type: '2',
+            data: buffer,
+            width, 
+            height
+        });
+    });
+</script>
