@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "libyuv.h": "c",
+        "convert_argb.h": "c"
+    }
+}

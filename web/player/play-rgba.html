@@ -3,7 +3,7 @@
  * @Company: kaochong
  * @Date: 2021-06-01 12:20:52
  * @LastEditors: xiuquanxu
- * @LastEditTime: 2021-06-01 12:29:16
+ * @LastEditTime: 2021-06-02 10:43:29
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +21,11 @@
     import { DrawRgba } from '../../help/draw-rgba.js';
     const canvas = document.getElementById('rgba');
     const d = new DrawRgba(canvas);
-    fetch('../../data/1280-720-rgba.raw').then(res => res.arrayBuffer()).then(buffer => {
+    // fetch('../../data/1280-720-rgba.raw').then(res => res.arrayBuffer()).then(buffer => {
+    //     d.play(new Uint8Array(buffer), 1280, 720);
+    // });/mygithub/web-media/
+    fetch('../../lib/libyuv/1280-720-argb-1.raw').then(res => res.arrayBuffer()).then(buffer => {
+        console.log(buffer);
         d.play(new Uint8Array(buffer), 1280, 720);
     });
 </script>

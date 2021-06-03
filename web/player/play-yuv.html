@@ -3,5 +3,33 @@
  * @Company: kaochong
  * @Date: 2021-06-01 12:20:58
  * @LastEditors: xiuquanxu
- * @LastEditTime: 2021-06-01 12:20:58
+ * @LastEditTime: 2021-06-01 18:05:24
 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="yuv" width="1280" height="720"></canvas>
+</body>
+</html>
+<script type="module">
+    import { DrawYuv } from '../../help/draw-yuv.js';
+    const canvas = document.getElementById('yuv');
+    const d = new DrawYuv(canvas);
+    fetch('../../data/1280-720-yuv.raw').then(res => res.arrayBuffer()).then(buffer => {
+        buffer = new Uint8Array(buffer);
+        const width = 1280, height = 720;
+        d.play({
+            width,
+            height,
+            yData: buffer.slice(0, width * height),
+            uData: buffer.slice(width * height, width * height * 1.25),
+            vData: buffer.slice(width * height * 1.25, width * height * 1.5),
+        });
+    });
+</script>

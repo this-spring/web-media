@@ -3,7 +3,7 @@
  * @Company: kaochong
  * @Date: 2021-03-17 23:09:55
  * @LastEditors: xiuquanxu
- * @LastEditTime: 2021-06-01 11:17:04
+ * @LastEditTime: 2021-06-01 18:08:11
 */
 // 返回null则不支持webgl
 const getGL = (canvas, contextOptions) => {
@@ -76,20 +76,14 @@ const compileShader = (gl, vertexSource, fragmentSource) => {
         gl.deleteShader(vertexShader);
         throw new Error(`link error:${linked}`);
     }
+    gl.program = program;
     return program;
 }
 
-
-class GlHtml {
-    /**
-     * @param {*} opt
-     * opt: {
-     *  id: 'xx' // canvas id
-     * } 
-     */
-    constructor(opt) {
-        this.id = opt.id;
-        this.canvas = document.getElementById(this.id);
+// 支持YUV420
+class DrawYuv {
+    constructor(canvas) {
+        this.canvas = canvas;
         // this.context = this.canvas.getContext('2d');
         this.gl = getGL(this.canvas);
         this.width = 0;
@@ -124,7 +118,7 @@ class GlHtml {
      *  vData: xx,
      * }
      */
-    drawImgByYuv(opt) {
+     play(opt) {
         const { width, height, yData, uData, vData } = opt;
 
         this.gl.viewport(0, 0, width, height);
@@ -250,3 +244,5 @@ class GlHtml {
         return FragmentShader;
     }
 }
+
+export { DrawYuv }
