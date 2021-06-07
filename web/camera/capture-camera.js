@@ -3,7 +3,7 @@
  * @Company: kaochong
  * @Date: 2021-05-18 19:24:44
  * @LastEditors: xiuquanxu
- * @LastEditTime: 2021-06-01 12:25:22
+ * @LastEditTime: 2021-06-04 17:02:16
 */
 import { DownloadBytes } from '../../help/download.js';
 const canvas = document.getElementById('canvas');

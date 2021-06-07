@@ -3,7 +3,7 @@
  * @Company: kaochong
  * @Date: 2021-05-31 19:02:38
  * @LastEditors: xiuquanxu
- * @LastEditTime: 2021-06-02 18:02:44
+ * @LastEditTime: 2021-06-04 17:08:17
  */
 #include <stdlib.h>
 #include <stdio.h>
@@ -33,22 +33,22 @@ int ConvertYUV420P2RGBA8888(uint8_t* src_frame, uint8_t* dst_frame, int width, i
                            width, height);
 }
 
-// int main() {
-//     FILE *fin = NULL;
-//     FILE *fout = NULL;
-//     fin = fopen("./1280-720-rgba.raw", "rb");
-//     fout = fopen("./1280-720-yuv-1.raw", "wb");
-//     int width = 1280;
-//     int height = 720;
-//     int read_len = width * height * 4;
-//     int out_len = width * height * 3 / 2;
-//     uint8_t in[read_len];
-//     uint8_t out[out_len];
-//     fread(in, 1, read_len, fin);
-//     int res = ConvertRGBA88882YUV420P(in, out, width, height);
-//     fwrite(out, 1, out_len, fout);
-//     return 0;
-// }
+int main() {
+    FILE *fin = NULL;
+    FILE *fout = NULL;
+    fin = fopen("./1280-720-rgba2.raw", "rb");
+    fout = fopen("./1280-720-yuv-2.raw", "wb");
+    int width = 1280;
+    int height = 720;
+    int read_len = width * height * 4;
+    int out_len = width * height * 3 / 2;
+    uint8_t in[read_len];
+    uint8_t out[out_len];
+    fread(in, 1, read_len, fin);
+    int res = ConvertRGBA88882YUV420P(in, out, width, height);
+    fwrite(out, 1, out_len, fout);
+    return 0;
+}
 
 // int main() {
 //     FILE *fin = NULL;

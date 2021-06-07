@@ -1,0 +1,8 @@
+CXX=g++
+CXXFLAGS = 
+	-I ../../codec/api/svc/ \
+	-L ../../
+
+$(CXX) $(CXXFLAGS) 
+
+

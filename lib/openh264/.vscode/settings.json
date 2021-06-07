@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "stdio.h": "c",
+        "codec_app_def.h": "c",
+        "algorithm": "cpp"
+    }
+}
